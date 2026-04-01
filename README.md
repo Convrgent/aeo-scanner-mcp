@@ -87,3 +87,5 @@ The included `optimize_site` prompt guides the full workflow:
 ---
 
 Built by [Convrgent](https://convrgent.ai) — personality intelligence and AI visibility tools for agents.
+
+<!-- mcp-name: io.github.Convrgent/aeo-scanner -->

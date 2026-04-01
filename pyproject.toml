@@ -1,6 +1,6 @@
 [project]
 name = "aeo-scanner"
-version = "1.0.0"
+version = "1.0.1"
 description = "MCP server for AI search visibility auditing. Checks AEO score and Agent Readiness score for any website."
 readme = "README.md"
 license = {text = "MIT"}

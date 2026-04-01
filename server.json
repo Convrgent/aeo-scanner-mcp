@@ -1,26 +1,30 @@
 {
-  "name": "aeo-scanner",
-  "version": "1.0.0",
-  "description": "AI search visibility audit. Two scores: AEO Score (AI search findability) and Agent Readiness (agent interaction capability). Returns actionable fix code.",
-  "author": {
-    "name": "Convrgent",
-    "url": "https://convrgent.ai"
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Convrgent/aeo-scanner",
+  "title": "AEO Scanner",
+  "description": "AI search visibility audit with AEO Score and Agent Readiness scores plus fix code.",
+  "repository": {
+    "url": "https://github.com/Convrgent/aeo-scanner-mcp",
+    "source": "github"
   },
-  "repository": "https://github.com/convrgent/aeo-scanner-mcp",
-  "homepage": "https://scan.convrgent.ai",
-  "categories": ["web-development", "seo", "ai-visibility", "agent-readiness"],
-  "packages": {
-    "pypi": "aeo-scanner"
-  },
-  "tools": [
-    {"name": "scan_site", "description": "Quick AI visibility scan with dual scores (free)"},
-    {"name": "audit_site", "description": "Full 25+ check AI visibility audit ($1.00)"},
-    {"name": "fix_site", "description": "Generate fix code for all AI visibility issues ($5.00)"}
-  ],
-  "resources": [
-    {"uri": "aeo://reference/scoring-methodology", "description": "Scoring methodology documentation"}
-  ],
-  "prompts": [
-    {"name": "optimize_site", "description": "Full scan-audit-fix-verify workflow"}
+  "version": "1.0.1",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "aeo-scanner",
+      "version": "1.0.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "API key for paid tools (audit_site, fix_site). Get at https://scan.convrgent.ai",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true,
+          "name": "AEO_API_KEY"
+        }
+      ]
+    }
   ]
 }
