@@ -9,15 +9,26 @@ AI search visibility audit for any website. Two scores, one scan.
 
 ## Quick start
 
+**Remote server (recommended)** — zero install, just add the URL:
+
 ```bash
-# Claude Code — one command
-claude mcp add aeo-scanner -- uvx aeo-scanner
+# Claude Code
+claude mcp add --transport http aeo-scanner https://aeo-mcp.convrgent.ai/mcp
+
+# Claude Desktop / Claude.ai
+# Settings → Connectors → Add custom connector → https://aeo-mcp.convrgent.ai/mcp
 
 # Cursor — add to .cursor/mcp.json
-{ "aeo-scanner": { "command": "uvx", "args": ["aeo-scanner"] } }
+{ "aeo-scanner": { "url": "https://aeo-mcp.convrgent.ai/mcp" } }
 ```
 
 Then ask your AI assistant: *"Scan example.com for AI visibility"*
+
+**Alternative: local install** via PyPI (stdio transport):
+
+```bash
+claude mcp add aeo-scanner -- uvx aeo-scanner
+```
 
 ## Tools
 
@@ -29,7 +40,7 @@ Then ask your AI assistant: *"Scan example.com for AI visibility"*
 
 ## Free tier
 
-`scan_site` works without any authentication. No API key, no wallet, no setup. Just install and scan.
+`scan_site` works without any authentication. No API key, no wallet, no setup.
 
 Rate limits: 20 scans/hour per IP, 5 per URL per day.
 
@@ -38,19 +49,7 @@ Rate limits: 20 scans/hour per IP, 5 per URL per day.
 `audit_site` and `fix_site` require an API key:
 
 1. Get your key at [scan.convrgent.ai](https://scan.convrgent.ai)
-2. Add it to your MCP config:
-
-```json
-{
-  "aeo-scanner": {
-    "command": "uvx",
-    "args": ["aeo-scanner"],
-    "env": {
-      "AEO_API_KEY": "your-api-key"
-    }
-  }
-}
-```
+2. Set `AEO_API_KEY` in your MCP config
 
 Or pay per call with USDC via [x402 protocol](https://www.x402.org/) (Base network).
 
@@ -63,10 +62,6 @@ The included `optimize_site` prompt guides the full workflow:
 3. **Fix** — get working code to apply ($5)
 4. **Rescan** — verify improvement (free)
 
-## Context cost
-
-~1,000 tokens at startup. 40x lighter than GitHub MCP.
-
 ## Scoring
 
 25+ checks across 8 categories. See the built-in `aeo://reference/scoring-methodology` resource for full details, or read [scoring-methodology.md](scoring-methodology.md).
@@ -76,13 +71,6 @@ The included `optimize_site` prompt guides the full workflow:
 **Agent Readiness categories:** Machine Identity (25%), API Discoverability (25%), Structured Actions (20%), Programmatic Access (20%), Data Clarity (10%)
 
 **Grades:** A (90+), B (75-89), C (60-74), D (40-59), F (0-39)
-
-## Environment variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `AEO_API_KEY` | For paid tools | API key from scan.convrgent.ai |
-| `AEO_API_URL` | No | Override API base URL (default: https://scan.convrgent.ai) |
 
 ---
 

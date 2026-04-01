@@ -1,0 +1,33 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "aeo-scanner-mcp",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-03-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"migrations": [
+		{
+			"new_sqlite_classes": ["AeoScannerMcp"],
+			"tag": "v1"
+		}
+	],
+	"durable_objects": {
+		"bindings": [
+			{
+				"class_name": "AeoScannerMcp",
+				"name": "MCP_OBJECT"
+			}
+		]
+	},
+	"vars": {
+		"AEO_API_URL": "https://scan.convrgent.ai"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"routes": [
+		{
+			"pattern": "aeo-mcp.convrgent.ai",
+			"custom_domain": true
+		}
+	]
+}

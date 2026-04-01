@@ -7,7 +7,13 @@
     "url": "https://github.com/Convrgent/aeo-scanner-mcp",
     "source": "github"
   },
-  "version": "1.0.1",
+  "version": "2.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://aeo-mcp.convrgent.ai/mcp"
+    }
+  ],
   "packages": [
     {
       "registryType": "pypi",
