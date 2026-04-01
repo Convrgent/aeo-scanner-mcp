@@ -82,7 +82,7 @@ The included `optimize_site` prompt guides the full workflow:
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `AEO_API_KEY` | For paid tools | API key from scan.convrgent.ai |
-| `AEO_API_URL` | No | Override API base URL (default: https://aeo.convrgent.ai) |
+| `AEO_API_URL` | No | Override API base URL (default: https://scan.convrgent.ai) |
 
 ---
 
