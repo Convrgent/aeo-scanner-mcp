@@ -1,6 +1,6 @@
 # AEO Scanner — Scoring Methodology
 
-Two independent scores, one scan.
+Three independent scores, one scan. Plus AI Identity Card and business profile detection.
 
 ## AEO Score (0-100)
 
@@ -26,30 +26,72 @@ Each check has a severity (critical = 3x weight, warning = 2x, info = 1x). Categ
 
 ---
 
+## GEO Score (0-100)
+
+Measures how likely AI is to cite your site as a source — your citation readiness for AI-generated answers.
+
+### Categories
+
+**Brand Narrative Clarity (25% of score)**
+Clear, consistent brand story that AI can extract and summarize. Includes mission statements, value propositions, and unique differentiators in machine-parseable formats.
+
+**Citation Readiness (25% of score)**
+Content formatted for AI citation — attributed statistics, quotable claims with sources, structured data points, and expert quotes that AI models can extract and reference.
+
+**Authority Signals (25% of score)**
+Signals that establish the site as a trustworthy source — author credentials, publication history, industry recognition, backlink quality indicators, and E-E-A-T markers.
+
+**Entity Definition (25% of score)**
+How well the site defines itself as a distinct entity that AI can recognize — consistent naming, entity relationships, knowledge graph signals, and Wikipedia-style definitional content.
+
+---
+
 ## Agent Readiness Score (0-100)
 
 Measures how easily AI agents can understand, interact with, and transact on your site.
 
 ### Categories
 
-**Machine Identity (25% of score)**
+**Machine Identity (30% of score)**
 llms.txt depth (scored on API info, pricing, auth details), site description clarity (action verb + noun + audience in first 100 words), consistent machine-readable name across Organization schema, og:site_name, and page title.
 
 **API Discoverability (25% of score)**
 OpenAPI/Swagger specification at standard paths, developer documentation with technical signals (API key, SDK, curl, REST, GraphQL, webhook references), and visible API endpoints in content.
 
-**Structured Actions (20% of score)**
+**Structured Actions (25% of score)**
 Machine-readable pricing (Product/Service schema with offers), action affordances (forms, sign-up links, CTAs, Action schema), and machine-readable contact info (contactPoint in Organization schema).
 
 **Programmatic Access (20% of score)**
 Payment protocols (x402, Stripe, crypto/USDC detection), authentication documentation, and webhook/event support (callback URLs, event-driven patterns).
 
-**Data Clarity (10% of score)**
-Reserved for future checks.
+---
 
-### How checks are scored
+## Business Profiles
 
-Agent checks use the actual score (0-100) of each check, weighted by severity. Category score = weighted average of check scores. Overall Agent Readiness = weighted average of category scores.
+The scanner detects the site's business type and returns which scores matter most:
+
+| Profile | Primary Scores | Secondary Score | Examples |
+|---------|---------------|-----------------|----------|
+| commerce | AEO + GEO | Agent Readiness | E-commerce, retail, physical products |
+| saas | AEO + Agent Readiness | GEO | Software platforms, developer tools, APIs |
+| media | AEO + GEO | Agent Readiness | Publishers, blogs, news, content sites |
+| general | All three equal | — | Mixed or undetected business type |
+
+The response includes profile name, label, confidence score, and signals that led to the detection.
+
+## AI Identity Card
+
+Shows how AI currently perceives the brand:
+
+- **brandName** — the name AI associates with the site
+- **summary** — how AI would describe the business in one sentence
+- **category** — the industry/niche AI places the site in
+- **confidence** — how confident the detection is
+- **citableClaims** — specific claims AI could cite from the site
+- **verifiedPresence** — where AI can verify the brand exists (schema, social, directories)
+- **gaps** — what AI doesn't know about the brand (the most actionable insight)
+
+The gap between actual brand identity and AI's perception is the key insight. Closing these gaps improves all three scores.
 
 ---
 
@@ -65,25 +107,11 @@ Agent checks use the actual score (0-100) of each check, weighted by severity. C
 
 ---
 
-## What raises your AEO Score
+## Score Projections
 
-- Complete JSON-LD schema (Organization + WebSite on homepage)
-- robots.txt allowing AI crawlers
-- /llms.txt with structured content
-- Definition blocks in opening paragraphs
-- 300+ words with data density
-- Author attribution and freshness signals
-
-## What raises your Agent Readiness Score
-
-- Deep llms.txt with API docs, pricing, auth info
-- OpenAPI spec or developer documentation
-- Clear site description (what + who + for whom)
-- Pricing in schema (Product with offers)
-- Action affordances (forms, buttons, CTAs)
-- Contact info in Organization schema
-- Payment protocol support (x402, Stripe, crypto)
-- Authentication docs and webhook support
+The fix tool returns two projection tiers:
+- **Quick wins** — projected scores after applying only critical + high priority fixes
+- **Full implementation ceiling** — projected scores after applying all fixes
 
 ---
 
@@ -93,4 +121,4 @@ When scanning multiple pages, site-wide checks (robots.txt, sitemap, llms.txt) a
 
 ---
 
-Built by [Convrgent](https://convrgent.ai) — tools for AI agents.
+Built by [Convrgent](https://convrgent.ai) — AI visibility tools for agents.

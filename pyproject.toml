@@ -1,12 +1,12 @@
 [project]
 name = "aeo-scanner"
-version = "1.0.1"
-description = "MCP server for AI search visibility auditing. Checks AEO score and Agent Readiness score for any website."
+version = "2.1.0"
+description = "MCP server for AI search visibility auditing. Triple scoring: AEO (search findability), GEO (citation readiness), Agent Readiness (agent interaction). Plus AI Identity Card and business profile detection."
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
 authors = [{name = "Convrgent", email = "hello@convrgent.ai"}]
-keywords = ["mcp", "aeo", "seo", "ai-search", "agent-readiness", "ai-visibility"]
+keywords = ["mcp", "aeo", "geo", "seo", "ai-search", "agent-readiness", "ai-visibility", "ai-citation", "ai-identity"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",

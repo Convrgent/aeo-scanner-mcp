@@ -6,10 +6,10 @@ import { registerPrompts } from "./prompts";
 
 export class AeoScannerMcp extends McpAgent<Env> {
   server = new McpServer(
-    { name: "aeo-scanner", version: "2.0.0" },
+    { name: "aeo-scanner", version: "2.1.0" },
     {
       instructions:
-        "AI search visibility audit for any website. Use scan_site first (free) to get baseline scores, then audit_site for detailed breakdown, then fix_site for working fix code. The optimize_site prompt guides the full workflow.",
+        "AI search visibility audit for any website. Returns three scores (AEO, GEO, Agent Readiness), AI Identity Card, and business profile. Use scan_site first (free) to get baseline, then audit_site for detailed breakdown, then fix_site for working fix code. The optimize_site prompt guides the full workflow.",
     },
   );
 
@@ -23,6 +23,8 @@ export class AeoScannerMcp extends McpAgent<Env> {
 export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const url = new URL(request.url);
+    const ua = request.headers.get("user-agent") ?? "unknown";
+    console.log(`[REQ] ${request.method} ${url.pathname} | UA: ${ua}`);
 
     if (url.pathname === "/mcp") {
       return AeoScannerMcp.serve("/mcp").fetch(request, env, ctx);

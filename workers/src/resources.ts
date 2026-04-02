@@ -7,7 +7,7 @@ export function registerResources(server: McpServer) {
     "aeo://reference/scoring-methodology",
     {
       description:
-        "How AEO and Agent Readiness scores are calculated across 25+ checks in 8 categories.",
+        "How AEO, GEO, and Agent Readiness scores are calculated across 55+ checks in 12 categories. Includes business profile system and AI Identity Card explanation.",
     },
     async () => ({
       contents: [
