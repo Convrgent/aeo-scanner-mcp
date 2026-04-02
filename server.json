@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Convrgent/aeo-scanner",
   "title": "AEO Scanner",
-  "description": "AI search visibility audit with triple scoring: AEO (search findability), GEO (citation readiness), Agent Readiness (agent interaction). Plus AI Identity Card and business profile detection. Returns fix code.",
+  "description": "AI search visibility audit — AEO, GEO, Agent Readiness scores with AI Identity Card.",
   "repository": {
     "url": "https://github.com/Convrgent/aeo-scanner-mcp",
     "source": "github"
@@ -18,7 +18,7 @@
     {
       "registryType": "pypi",
       "identifier": "aeo-scanner",
-      "version": "1.0.1",
+      "version": "2.1.0",
       "transport": {
         "type": "stdio"
       },
