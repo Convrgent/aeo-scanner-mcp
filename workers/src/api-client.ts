@@ -103,6 +103,19 @@ export async function callFix(
   });
 }
 
+export async function callCompare(
+  env: Env,
+  url: string,
+  competitorUrl: string,
+  pages: number,
+): Promise<string> {
+  return handlePaidRequest(env, "/api/aeo/compare", {
+    url,
+    competitorUrl,
+    maxPages: Math.min(Math.max(1, pages), 5),
+  });
+}
+
 async function handlePaidRequest(
   env: Env,
   endpoint: string,

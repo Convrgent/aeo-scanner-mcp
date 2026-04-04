@@ -1,6 +1,6 @@
 [project]
 name = "aeo-scanner"
-version = "2.1.0"
+version = "2.2.0"
 description = "MCP server for AI search visibility auditing. Triple scoring: AEO (search findability), GEO (citation readiness), Agent Readiness (agent interaction). Plus AI Identity Card and business profile detection."
 readme = "README.md"
 license = {text = "MIT"}

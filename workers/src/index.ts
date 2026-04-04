@@ -6,10 +6,10 @@ import { registerPrompts } from "./prompts";
 
 export class AeoScannerMcp extends McpAgent<Env> {
   server = new McpServer(
-    { name: "aeo-scanner", version: "2.1.0" },
+    { name: "aeo-scanner", version: "2.2.0" },
     {
       instructions:
-        "AI search visibility audit for any website. Returns three scores (AEO, GEO, Agent Readiness), AI Identity Card, and business profile. Use scan_site first (free) to get baseline, then audit_site for detailed breakdown, then fix_site for working fix code. The optimize_site prompt guides the full workflow.",
+        "AI search visibility audit for any website. Returns three scores (AEO, GEO, Agent Readiness), AI Identity Card with mention readiness and detected competitors, and business profile. Use scan_site first (free), then audit_site for details, fix_site for fix code, or compare_sites to benchmark against a competitor. The optimize_site prompt guides the full workflow.",
     },
   );
 

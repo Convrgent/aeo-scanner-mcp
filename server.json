@@ -2,12 +2,12 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Convrgent/aeo-scanner",
   "title": "AEO Scanner",
-  "description": "AI search visibility audit — AEO, GEO, Agent Readiness scores with AI Identity Card.",
+  "description": "AI search visibility audit — AEO, GEO, Agent Readiness scores with mention readiness.",
   "repository": {
     "url": "https://github.com/Convrgent/aeo-scanner-mcp",
     "source": "github"
   },
-  "version": "2.1.0",
+  "version": "2.2.0",
   "remotes": [
     {
       "type": "streamable-http",
@@ -18,13 +18,13 @@
     {
       "registryType": "pypi",
       "identifier": "aeo-scanner",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
-          "description": "API key for paid tools (audit_site, fix_site). Get at https://scan.convrgent.ai",
+          "description": "API key for paid tools (audit_site, compare_sites, fix_site). Get at https://scan.convrgent.ai",
           "isRequired": false,
           "format": "string",
           "isSecret": true,

@@ -1,6 +1,6 @@
 # AEO Scanner — Scoring Methodology
 
-Three independent scores, one scan. Plus AI Identity Card and business profile detection.
+Three independent scores, one scan. Plus AI Identity Card with mention readiness, and business profile detection.
 
 ## AEO Score (0-100)
 
@@ -9,20 +9,16 @@ Measures how well AI search engines (ChatGPT, Perplexity, Google AI Overviews) c
 ### Categories
 
 **Structured Data (30% of score)**
-JSON-LD schema markup — Organization, WebSite, BreadcrumbList, FAQ, Article, Product schemas. Validates JSON-LD blocks are valid and contain required fields (name, url, logo, description, sameAs for Organization; headline, author, datePublished for Articles).
+JSON-LD schema markup — Organization, WebSite, BreadcrumbList, FAQ, Article, Product schemas. LocalBusiness is treated as an Organization subtype. Validates JSON-LD blocks are valid and contain required fields.
 
 **Meta & Technical (20% of score)**
 Canonical URLs, meta descriptions (50-160 chars), Open Graph tags, heading hierarchy (single H1, no gaps), language attribute, Twitter cards, robots.txt (must allow AI crawlers: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, OAI-SearchBot), and sitemap.xml with lastmod dates.
 
 **AI Accessibility (25% of score)**
-llms.txt (structured machine-readable site summary with sections, links, API info), llms-full.txt, definition blocks in first 500 words ("X is a Y" patterns), content structure (subheadings, lists, scannable paragraphs), and Q&A content format.
+llms.txt (structured machine-readable site summary), llms-full.txt, definition blocks in first 500 words, content structure (subheadings, lists, scannable paragraphs), and Q&A content format.
 
 **Content Quality (25% of score)**
-Data density (3+ statistics per 500 words), expert attribution (author meta, Person schema, credentials), content freshness signals (published/modified dates), content depth (300+ words minimum, 800+ for bonus), and unique value indicators (original research, case studies, proprietary data).
-
-### How checks are scored
-
-Each check has a severity (critical = 3x weight, warning = 2x, info = 1x). Category score = weighted sum of passed checks / total possible weight. Overall AEO score = weighted average of category scores.
+Data density (3+ statistics per 500 words), expert attribution (author meta, Person schema, credentials), content freshness signals (published/modified dates), content depth, and unique value indicators (original research, case studies, proprietary data). Note: content length has near-zero correlation with AI citations (53% of cited pages are under 1,000 words, WhyShy 2025). Only pages under 50 words get critical severity.
 
 ---
 
@@ -33,16 +29,24 @@ Measures how likely AI is to cite your site as a source — your citation readin
 ### Categories
 
 **Brand Narrative Clarity (25% of score)**
-Clear, consistent brand story that AI can extract and summarize. Includes mission statements, value propositions, and unique differentiators in machine-parseable formats.
+Clear, consistent brand story that AI can extract and summarize. Mission statements, value propositions, and unique differentiators in machine-parseable formats.
 
 **Citation Readiness (25% of score)**
-Content formatted for AI citation — attributed statistics, quotable claims with sources, structured data points, and expert quotes that AI models can extract and reference.
+8 checks measuring content formatted for AI citation:
+- Quotable Brand Claims — attributable statements AI can cite
+- Comparison Content — "vs" and "alternative to" patterns
+- Statistic Attribution — sourced data points
+- List Format Answers — structured, scannable answers
+- Citable Passage Blocks — 134-167 word self-contained passages (optimal length per Princeton KDD 2024)
+- **Factual Sentence Density** — % of sentences with concrete facts (numbers, dates, definitions). Definitional phrasing gets 36.2% citation rate vs 20.2% vague (Victorino Group)
+- **Answer Frontloading** — % of factual sentences in first 30% of content. 44.2% of AI citations come from first 30% of page (Growth Memo, 1.2M ChatGPT responses)
+- **Inline Source Citations** — citations per 1,000 words to external authoritative sources. "Cite Sources" is #1 GEO strategy at +115% visibility (Princeton KDD 2024)
 
 **Authority Signals (25% of score)**
-Signals that establish the site as a trustworthy source — author credentials, publication history, industry recognition, backlink quality indicators, and E-E-A-T markers.
+Author credentials, publication history, industry recognition, backlink quality indicators, and E-E-A-T markers.
 
 **Entity Definition (25% of score)**
-How well the site defines itself as a distinct entity that AI can recognize — consistent naming, entity relationships, knowledge graph signals, and Wikipedia-style definitional content.
+How well the site defines itself as a distinct entity — consistent naming, entity relationships, knowledge graph signals, and Wikipedia-style definitional content.
 
 ---
 
@@ -53,31 +57,18 @@ Measures how easily AI agents can understand, interact with, and transact on you
 ### Categories
 
 **Machine Identity (30% of score)**
-llms.txt depth (scored on API info, pricing, auth details), site description clarity (action verb + noun + audience in first 100 words), consistent machine-readable name across Organization schema, og:site_name, and page title.
+llms.txt depth, site description clarity (action verb + noun + audience in first 100 words), consistent machine-readable name across Organization schema, og:site_name, and page title.
 
 **API Discoverability (25% of score)**
-OpenAPI/Swagger specification at standard paths, developer documentation with technical signals (API key, SDK, curl, REST, GraphQL, webhook references), and visible API endpoints in content.
+OpenAPI/Swagger specification at standard paths, developer documentation with technical signals, and visible API endpoints in content.
 
 **Structured Actions (25% of score)**
-Machine-readable pricing (Product/Service schema with offers), action affordances (forms, sign-up links, CTAs, Action schema), and machine-readable contact info (contactPoint in Organization schema).
+Machine-readable pricing (Product/Service schema with offers), action affordances (forms, sign-up links, CTAs, Action schema), and machine-readable contact info.
 
 **Programmatic Access (20% of score)**
-Payment protocols (x402, Stripe, crypto/USDC detection), authentication documentation, and webhook/event support (callback URLs, event-driven patterns).
+Payment protocols (x402, Stripe, crypto/USDC detection), authentication documentation, and webhook/event support.
 
 ---
-
-## Business Profiles
-
-The scanner detects the site's business type and returns which scores matter most:
-
-| Profile | Primary Scores | Secondary Score | Examples |
-|---------|---------------|-----------------|----------|
-| commerce | AEO + GEO | Agent Readiness | E-commerce, retail, physical products |
-| saas | AEO + Agent Readiness | GEO | Software platforms, developer tools, APIs |
-| media | AEO + GEO | Agent Readiness | Publishers, blogs, news, content sites |
-| general | All three equal | — | Mixed or undetected business type |
-
-The response includes profile name, label, confidence score, and signals that led to the detection.
 
 ## AI Identity Card
 
@@ -89,9 +80,24 @@ Shows how AI currently perceives the brand:
 - **confidence** — how confident the detection is
 - **citableClaims** — specific claims AI could cite from the site
 - **verifiedPresence** — where AI can verify the brand exists (schema, social, directories)
-- **gaps** — what AI doesn't know about the brand (the most actionable insight)
+- **gaps** — what AI doesn't know about the brand
+- **mentionReadiness** (0-100) — predicts how likely AI engines are to mention the brand, based on 12 research-backed signals
+- **mentionSignals** — array of signals with present/absent status, points, and research source
+- **detectedCompetitors** — competitor names extracted from "vs" and "alternative to" patterns
 
-The gap between actual brand identity and AI's perception is the key insight. Closing these gaps improves all three scores.
+### Mention Readiness Research Basis
+Sites on 4+ platforms are 2.8x more likely to appear in ChatGPT (Digital Bloom 2025). However, only 9.2% of URLs are consistent across AI search results (SparkToro), which is why mention readiness uses structural signals rather than live checks.
+
+---
+
+## Business Profiles
+
+| Profile | Primary Scores | Secondary Score | Examples |
+|---------|---------------|-----------------|----------|
+| commerce | AEO + GEO | Agent Readiness | E-commerce, retail, physical products |
+| saas | AEO + Agent Readiness | GEO | Software platforms, developer tools, APIs |
+| media | AEO + GEO | Agent Readiness | Publishers, blogs, news, content sites |
+| general | All three equal | — | Mixed or undetected business type |
 
 ---
 
@@ -115,9 +121,16 @@ The fix tool returns two projection tiers:
 
 ---
 
-## Multi-page scanning
+## Research Sources
 
-When scanning multiple pages, site-wide checks (robots.txt, sitemap, llms.txt) are counted once. Per-page checks are aggregated across all scanned pages. Top issues are sorted by severity (critical first).
+- Princeton GEO paper (KDD 2024): 9 optimization strategies, "Cite Sources" = +115% visibility
+- Growth Memo (1.2M ChatGPT responses): 44.2% citations from first 30%, top 30 domains = 67% per topic
+- Victorino Group: 20.6% entity density, 36.2% definitional citation rate
+- Cornell University: +28% visibility from quantitative claims
+- Penfriend 2025: formatted content 28-40% more likely cited
+- WhyShy 2025: content length has near-zero correlation with citations
+- SparkToro: 9.2% URL consistency in AI search
+- Digital Bloom 2025: sites on 4+ platforms are 2.8x more likely in ChatGPT
 
 ---
 
