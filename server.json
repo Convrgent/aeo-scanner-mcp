@@ -2,12 +2,12 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Convrgent/aeo-scanner",
   "title": "AEO Scanner",
-  "description": "AI search visibility audit — AEO, GEO, Agent Readiness scores with mention readiness.",
+  "description": "AI visibility for ChatGPT/Perplexity/Claude — triple score (AEO+GEO+Agent) with fix code. Free.",
   "repository": {
     "url": "https://github.com/Convrgent/aeo-scanner-mcp",
     "source": "github"
   },
-  "version": "2.2.0",
+  "version": "2.2.1",
   "remotes": [
     {
       "type": "streamable-http",
@@ -18,7 +18,7 @@
     {
       "registryType": "pypi",
       "identifier": "aeo-scanner",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "transport": {
         "type": "stdio"
       },
